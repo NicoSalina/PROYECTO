@@ -4,8 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dotenv = require('dotenv');
-//const session = require('express-session');
-//const {verifyUser, verifyAdmin} = require('./middlewares/auth');
+const session = require('express-session');
+const {verifyUser, verifyAdmin} = require('./middlewares/auth');
 
 dotenv.config();
 const indexRouter = require('./routes/index');
@@ -14,7 +14,7 @@ const productos = require('./routes/productos');
 const registro = require('./routes/registro');
 const login = require('./routes/login');
 
-//const usuarios = require('./routes/usuarios');
+const usuarios = require('./routes/usuarios');
 //const carrito = require('./routes/carrito');
 
 const adminIndex = require('./routes/admin/index');
@@ -50,10 +50,10 @@ app.use('/login', login);
 
 //USERS
 app.use('/usuarios',verifyUser, usuarios);
-app.use('/carrito', verifyUser, carrito);
+//app.use('/carrito', verifyUser, carrito);
 
 //ADMIN
-app.use('/admin',verifyAdmin, adminIndex);
+app.use('/admin',verifyAdmin, adminIndex);    //TODO LO QUE TENGA EXTENCION ADMIN NO LO PUEDO ACCEDER SI NO SOY ADMIN
 app.use('/admin/productos', adminProductos);
 app.use('/admin/usuarios', adminUsuarios);
 app.use('/admin/categorias', adminCategorias);
